@@ -1,0 +1,51 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Student {% endblock %}
+
+{% block content %}
+<div style="margin-top: 5rem;">
+
+    
+    <form style="width: 60%;margin: 0 auto;display: flex;align-items: center;" action="/student" method="post">
+        <p style="font-size: 20px;width: 50%;">Enter student code</p>
+        <p><input style="height: 43px;margin-bottom: 5px;border: none;" type="text" name="studentCode" placeholder="Search..."/></p>
+        <p><input class="btn btn-sucess" type="submit" value="submit" /></p>
+    </form>
+    <table style="width:60vw;border: 1px #ccc solid;margin: 0 auto;" class="table-striped table">
+        <thead>
+            <tr style="background-color: royalblue; color: white;">
+                <th style="padding-left: 2rem;" scope="col">StudentCode</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">DOB</th>
+                <th scope="col">CN</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if no %}
+                <tr class="item">
+                    <td style="padding-left: 3rem;">{{ studentCode[no] }}</td>
+                    <td> {{ firstName[no] }} </td>
+                    <td> {{ lastName[no] }} </td>
+                    <td> {{ DOB[no] }} </td>
+                    <td> {{ CN[no] }} </td>
+                    <td><a href='/student/{{studentCode[no]}}'><button class="btn btn-outline-info">Chi tiết</button></a></td>
+                </tr>
+            {% endif %}
+            {% for i in range(0,length)%}
+                <tr class="item">
+                        <td style="padding-left: 3rem;">{{ studentCode[i] }}</td>
+                        <td> {{ firstName[i] }} </td>
+                        <td> {{ lastName[i] }} </td>
+                        <td> {{ DOB[i] }} </td>
+                        <td> {{ CN[i] }} </td>
+                        <td><a href='/student/{{studentCode[i]}}'><button class="btn btn-outline-info">Chi tiết</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+        
+{% endblock content %}

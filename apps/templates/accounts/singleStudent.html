@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>student_{{studentCode[no]}}</title>
+</head>
+<body>
+    <div  class="wrapper">
+        <div class="header">
+            <h1>Thông tin sinh viên </h1>
+        </div>
+        <div class="content">
+            <div class="item">
+                <div class="title">
+                    Mã sinh viên: 
+                </div>
+                <div class="content-item">
+                    {{studentCode[no]}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">
+                    Họ tên:
+                </div>
+                <div class="content-item">
+                    {{firstName[no]}} {{lastName[no]}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">
+                    Ngày sinh:
+                </div>
+                <div class="content-item">
+                    {{DOB[no]}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">
+                    Lớp:
+                </div>
+                <div class="content-item">
+                    {{CN[no]}}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<style type="text/css">
+    .wrapper{
+        max-width: 800px;
+        margin: 3rem auto 0 auto;
+        padding: 2rem;
+        border: 1px solid #d9d9d9;
+    }
+    .header h1{
+        color: #175765;
+        margin: unset;
+        margin-bottom: 1.5rem;
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+    }
+    .item{
+        display: flex;
+        margin-bottom: 1rem;
+    }
+    .title{
+        font-size: 20px;
+        width: 20%;
+        
+    }
+</style>
+</html>

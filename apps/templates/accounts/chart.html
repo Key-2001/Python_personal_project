@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Wine</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="info">
+            <table style="width:100%;border: 1px #ccc solid;" class="table-striped table">
+                <thead>
+                    <tr style="background-color: royalblue; color: white;height: 32px;">
+                        
+                        <th scope="col">Country</th>
+                        <th scope="col">Số chai</th>
+                        <th scope="col">TB điểm</th>
+                        <th scope="col">TB giá/ chai</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            
+                    {% for i in range(0,length) %}
+                    <tr style="margin: 1rem 0; height: 32px;background-color: rgba(54, 162, 235, 0.1);" class="item">
+                        <td id="country" style="text-align: center;">{{arrCountry[i]}}</td>
+                        <td id="amount" style="text-align: center;">{{arrAmount[i]}}</td>
+                        <td id="point" style="text-align: center;">{{medPoint[i]}}</td>
+                        <td id="price" style="text-align: center;">{{medPrice[i]}}</td>
+                    </tr>
+                    {% endfor %}
+            
+                    
+                </tbody>
+            </table>
+            <h4>Top 10 Quốc gia nổi tiếng về rượu</h4>
+        </div>
+        <div class="chart">
+            <canvas id="myChart" ></canvas>
+            <h4>Biểu đồ số chai rượu nổi tiếng tương ứng với các nước</h4>
+        </div>  
+        <div style="width: 48%;"  class="chart">
+            <canvas id="myChart1"></canvas>
+            <h4>Biểu đồ trung bình điểm tương ứng với các nước</h4>
+        </div>  
+        <div style="width: 48%;" class="chart">
+            <canvas id="myChart2"></canvas>
+            <h4>Biểu đồ trung bình giá tương ứng với các nước</h4>
+        </div>
+            <script>
+                const country = document.querySelectorAll('#country');
+                let arrCountry = [];
+                country.forEach((item,index) => {
+                    arrCountry.push(item.innerHTML);
+                })
+                // console.log(arrCountry)
+                const amount = document.querySelectorAll('#amount');
+                let arrAmount = [];
+                amount.forEach((item,index) => {
+                    arrAmount.push(parseInt(item.innerHTML));
+                })
+                console.log(arrAmount)
+                const ctx = document.getElementById('myChart');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: arrCountry,
+                        datasets: [{
+                            label: '# Số chai',
+                            data: arrAmount,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, .8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 206, 86, 0.8)',
+                                'rgba(153, 102, 255, 0.8)',
+                                
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(153, 102, 255, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            const point = document.querySelectorAll('#point');
+            let arrPoint = [];
+            point.forEach((item, index) => {
+                arrPoint.push(parseInt(item.innerHTML));
+            })
+
+                const ctz = document.getElementById('myChart1');
+                const myChart1 = new Chart(ctz, {
+                    type:'line',
+                    data: {
+                        labels: arrCountry,
+                        datasets: [{
+                            label: 'Trung bình điểm',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: arrPoint
+                        }]
+                    }
+                });
+
+            const price = document.querySelectorAll('#price');
+                let arrPrice = [];
+                price.forEach((item, index) => {
+                    arrPrice.push(parseInt(item.innerHTML));
+                })
+
+                const cta = document.getElementById('myChart2');
+                const myChart2 = new Chart(cta, {
+                    type: 'line',
+                    data: {
+                        labels: arrCountry,
+                        datasets: [{
+                            label: 'Price: $/chai',
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            borderColor: 'rgba(153, 102, 255, 0.2)',
+                            data: arrPrice
+                        }]
+                    }
+                });
+            </script>
+            
+            
+       
+    
+</body>
+<style type="text/css">
+        .wrapper{
+            max-width: 1280px;
+            margin: 3rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .info{
+            width: 40%;
+            padding-top: 2rem;
+            
+        }
+        .chart{
+            width: 55%;
+            padding-top: 3rem;
+            font-weight: 400;
+        }
+        h4{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+</style>
+</html>
